@@ -1,5 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';  
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/es/integration/react'
+
+import configureStore from './store/configureStore'
 import './App.css';
 
 import AuthLayoutRoute from './components/Layouts/AuthLayout/AuthLayoutRoute'
@@ -10,20 +14,28 @@ import HomePage from './components/HomePage/HomePage'
 import CartPage from './components/CartPage/CartPage'
 import RegisterPage from './components/RegisterPage/RegisterPage'
 
+const { persistor, store } = configureStore()
 
 const App = () => {
   return (
-    <Router>
-      <Switch>
-          <Route exact path="/">  
-            <Redirect to="/home" />  
-          </Route>
-          <AuthLayoutRoute path="/login" component={LoginPage} />  
-          <AuthLayoutRoute path="/register" component={RegisterPage} />  
-          <MainLayoutRoute path="/home" component={HomePage} />
-          <MainLayoutRoute path="/cart" component={CartPage} />
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <PersistGate
+        loading={null}
+        persistor={persistor}
+        >
+        <Router>
+          <Switch>
+              <Route exact path="/">  
+                <Redirect to="/home" />  
+              </Route>
+              <AuthLayoutRoute path="/login" component={LoginPage} />  
+              <AuthLayoutRoute path="/register" component={RegisterPage} />  
+              <MainLayoutRoute path="/home" component={HomePage} />
+              <MainLayoutRoute path="/cart" component={CartPage} />
+          </Switch>
+        </Router>
+      </PersistGate>
+    </Provider>
   );
 }
 
