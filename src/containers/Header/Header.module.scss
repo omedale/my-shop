@@ -1,0 +1,42 @@
+.headerWrapper {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  -webkit-box-shadow: rgba(0,0,0,.075) 0 .125rem .25rem!important;
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+  margin-bottom: 1rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  background: #e5e5e5;
+}
+
+.searchBar {
+  width: 200px;
+}
+.searchBar input {
+  border-radius: 12px;
+}
+
+.customerWrap {
+  margin-right: 8px;
+  height: 24px;
+}
+
+.customerName {
+  font-family: 'Merienda', cursive;
+}
+
+.navWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .navWrapper {
+    display: unset;
+    justify-content: unset;
+    width: 100%;
+  }
+}

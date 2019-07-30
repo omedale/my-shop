@@ -1,11 +1,15 @@
 import React from "react";
 import styles from './MainLayout.module.css';
 
+import Header from '../../../containers/Header/Header';
+import Footer from '../../Common/Footer';
+
 const MainLayout = ({ children }) => (
-  <>
-   <h2 className={styles.error}>Main Layout</h2>
-    {children}
-  </>
+  <div className={styles.mainApp}>
+    <Header/>
+    <div className={[styles.mainContent, 'container'].join(' ')}>{children}</div>
+    <Footer />
+  </div>
 );
 
 export default MainLayout;

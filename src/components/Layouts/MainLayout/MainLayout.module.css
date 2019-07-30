@@ -1,0 +1,18 @@
+.mainApp {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.mainContent {
+  margin-top: 100px;
+  height: 95vh;
+  overflow-y: scroll;
+}
+
+@media screen and (max-width: 992px) {
+  .mainContent {
+    margin-top: 140px;
+  }
+}

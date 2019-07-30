@@ -16,3 +16,15 @@
 .fullLenghtButton {
   width: 100%;
 }
+
+.appLogo {
+  font-family: Merienda,cursive;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
