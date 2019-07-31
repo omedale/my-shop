@@ -1,0 +1,17 @@
+.FilterWrapper {
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+  background: #e5e5e5;
+  -webkit-box-flex: 1;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.priceWrapper {
+  display: flex;
+}
+
+.priceInput {
+  border-radius: 12px !important;
+  width: 90px;
+  height: 24px;
+}

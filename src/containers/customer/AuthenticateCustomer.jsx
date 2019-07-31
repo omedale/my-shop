@@ -1,11 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'antd';
+import Proptypes from 'prop-types'
 
 import { authenticationCustomer } from '../../actions/customers'
 import AuthForm from '../../components/Common/AuthForm'
 
 class Authenticator extends React.Component {
+  static propTypes = {
+    authType: Proptypes.string.isRequired
+  }
+
+  static defaultProps = {
+    authType: 'LOGIN'
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {

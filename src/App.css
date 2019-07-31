@@ -28,3 +28,24 @@ a {
 a:hover {
   text-decoration: none !important;
 }
+
+.ant-select-selection--multiple {
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+}
+
+.anticon {
+  vertical-align: 0.10em !important;
+}
+
+.filter-item {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.ant-btn-sm {
+  height: unset !important;
+}
