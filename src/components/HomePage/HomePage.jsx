@@ -1,9 +1,9 @@
 import React from 'react';
+import ProductSection from '../../containers/ProductSection/ProductSection'
 
 const HomePage = () => (
   <>
-    <h2>filter</h2>
-    <h2>body</h2>
+    <ProductSection />
   </>
 )
 
