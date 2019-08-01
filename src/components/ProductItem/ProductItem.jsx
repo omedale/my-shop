@@ -9,7 +9,7 @@ const ProductItem = ({ product }) => (
     <div className={styles.product}>
       <div className={styles.productLink}>
           <div className={styles.productImage}>
-            <img className="img-responsive" alt={product.name} src=""></img>
+            <img className="img-responsive" alt={product.name} src={product.image}></img>
           </div>
           <div className={styles.cardProduct}>
             <div className={styles.infoWrap}>

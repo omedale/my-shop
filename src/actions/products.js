@@ -26,3 +26,14 @@ export const getProducts = (page) => {
     .catch(error => console.log(error.response.data.error))
   }
 }
+
+export const searchProducts = (page, searchWord) => {
+  return (dispatch, getState) => {
+    dispatch(fetchProduct())
+    ProductServices.searchProducts(page, searchWord)
+    .then(response => {
+      dispatch(fetchProductSuccess(response.data))
+    })
+    .catch(error => console.log(error.response.data.error))
+  }
+}

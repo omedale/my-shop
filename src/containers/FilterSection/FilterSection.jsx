@@ -4,6 +4,7 @@ import Filter from '../../components/Common/Filter/Filter'
 import { getFilterData } from '../../actions/config'
 
 class FilterSection extends React.Component {
+
   componentDidMount() {
     this.props.fetchFilterData();
   }
