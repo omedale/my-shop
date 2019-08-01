@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Filter from '../../components/Common/Filter/Filter'
-import Products from '../../components/Products/Products'
 import { getFilterData } from '../../actions/config'
 
-class ProductSection extends React.Component {
+class FilterSection extends React.Component {
   componentDidMount() {
     this.props.fetchFilterData();
   }
@@ -29,7 +28,6 @@ class ProductSection extends React.Component {
           defaultCategory={this.props.defaultDepartment}
           defaultPrice={this.props.defaultPrice}
         />
-        <Products />
       </>
     )
   }
@@ -53,4 +51,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductSection);
+export default connect(mapStateToProps, mapDispatchToProps)(FilterSection);

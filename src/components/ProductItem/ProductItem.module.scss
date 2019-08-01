@@ -1,0 +1,41 @@
+.product {
+  background: #FFF;
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+}
+.productLink {
+  display: block;
+  color: #3D3D3D;
+  cursor: pointer;
+}
+.productLink:hover {
+  color: #3D3D3D;
+  text-decoration: none;
+}
+.product .productImage {
+  width: 100%;
+}
+.productImage img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 225px;
+}
+.cardProduct {
+  padding: 0px 19px 18px 19px;
+}
+.productInfo {
+  flex: 2;
+}
+.productPrice {
+  font-size: large;
+  text-decoration: line-through;
+}
+.discountedProductPrice {
+  font-size: large;
+  // color: #1ca57a;
+}
+.productName {
+  color: rgba(0, 0, 0, 0.65);
+}

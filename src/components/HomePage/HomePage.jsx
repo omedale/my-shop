@@ -1,9 +1,11 @@
 import React from 'react';
-import ProductSection from '../../containers/ProductSection/ProductSection'
+import FilterSection from '../../containers/FilterSection/FilterSection'
+import Product from '../../containers/Products/Products'
 
 const HomePage = () => (
   <>
-    <ProductSection />
+    <FilterSection />
+    <Product />
   </>
 )
 

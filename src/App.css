@@ -49,3 +49,28 @@ a:hover {
 .ant-btn-sm {
   height: unset !important;
 }
+
+.spinner {
+  text-align: center;
+  background: rgba(0,0,0,0.05);
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 35vh 50px;
+  margin: 20px 0;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-pull-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-pull-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
