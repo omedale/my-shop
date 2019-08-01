@@ -1,5 +1,6 @@
 import { FETCH_PRODUCTS, FETCH_PRODUCTS_SUCCESS } from '../constants/products';
 import ProductServices from '../services/products';
+const initialFilterData = {department_ids: [], category_ids: [], price_range: [0, 0]};
 
 const fetchProduct = (data) => {
   return {
@@ -15,25 +16,21 @@ const fetchProductSuccess = (data) => {
   }
 }
 
-
-export const getProducts = (page) => {
+export const getProducts = (page, searchWord = '', filterData = initialFilterData) => {
   return (dispatch, getState) => {
     dispatch(fetchProduct())
-    ProductServices.getProducts(page)
-    .then(response => {
-      dispatch(fetchProductSuccess(response.data))
-    })
-    .catch(error => console.log(error.response.data.error))
-  }
-}
-
-export const searchProducts = (page, searchWord) => {
-  return (dispatch, getState) => {
-    dispatch(fetchProduct())
-    ProductServices.searchProducts(page, searchWord)
-    .then(response => {
-      dispatch(fetchProductSuccess(response.data))
-    })
-    .catch(error => console.log(error.response.data.error))
+    if (searchWord.trim().length) {
+      ProductServices.searchProducts(page, searchWord, filterData)
+      .then(response => {
+        dispatch(fetchProductSuccess(response.data))
+      })
+      .catch(error => console.log(error.response.data.error))
+    } else {
+      ProductServices.getProducts(page, filterData)
+      .then(response => {
+        dispatch(fetchProductSuccess(response.data))
+      })
+      .catch(error => console.log(error.response.data.error))
+    }
   }
 }

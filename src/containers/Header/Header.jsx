@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { searchProducts } from '../../actions/products'
+import { getProducts } from '../../actions/products'
 import TopBar from '../../components/Common/TopBar/TopBar'
 
 class Header extends React.Component {
 
   handleSearchInput = (value) => {
-    this.props.searchProducts(1, value)
+    this.props.getProducts(1, value)
   }
 
   render() {
+    console.log(this.props)
     return (
       <TopBar onSearch={this.handleSearchInput} />
     );
@@ -17,7 +18,7 @@ class Header extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  searchProducts: (page, word) => dispatch(searchProducts(page, word))
+  getProducts: (page, word) => dispatch(getProducts(page, word))
 })
 
 export default connect(null, mapDispatchToProps)(Header);

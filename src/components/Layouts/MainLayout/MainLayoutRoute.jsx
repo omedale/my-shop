@@ -6,7 +6,7 @@ const MainLayoutRoute = ({component: Component, ...rest}) => {
   return (
     <Route {...rest} render={matchProps => (
       <>
-        <MainLayout>
+        <MainLayout {...matchProps} >
           <Component {...matchProps} />
         </MainLayout>
       </>

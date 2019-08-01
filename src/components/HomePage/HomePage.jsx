@@ -2,9 +2,9 @@ import React from 'react';
 import FilterSection from '../../containers/FilterSection/FilterSection'
 import Product from '../../containers/Products/Products'
 
-const HomePage = () => (
+const HomePage = (props) => (
   <>
-    <FilterSection />
+    <FilterSection {...props} />
     <Product />
   </>
 )

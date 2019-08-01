@@ -6,7 +6,7 @@ import Footer from '../../Common/Footer';
 
 const MainLayout = ({ children }) => (
   <div className={styles.mainApp}>
-    <Header/>
+    <Header {...children.props} />
     <div className={[styles.mainContent, 'container'].join(' ')}>{children}</div>
     <Footer />
   </div>
