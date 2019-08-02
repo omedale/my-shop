@@ -18,6 +18,8 @@ class FilterSection extends Component {
     this.props.fetchFilterData();
     const params = new URLSearchParams(this.props.history.location.search)
     const filterQuery = params.get('filter');
+    const searchQuery = params.get('q');
+    const searchParam = searchQuery ? searchQuery : '';
     const filterData = filterQuery ? JSON.parse(filterQuery) : { price_range: [0,0], department_ids: [], category_ids: [] }
     this.setState({
       maxPrice: filterData.price_range[1],
@@ -25,6 +27,7 @@ class FilterSection extends Component {
       filterByDepartmentIds: filterData.department_ids,
       filterByCategoryIds: filterData.category_ids,
     })
+    this.props.filterProducts(PAGE, searchParam, filterData)
   }
 
   handleDepartmentChange = (value) => {
