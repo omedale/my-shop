@@ -17,12 +17,6 @@ const product = (state = initialState, action) => {
         count: action.count,
         loading: false
       })
-    case 'FILTER_PRODUCTS_SUCCESS':
-      return Object.assign({}, state, {
-        products: action.products,
-        count: action.count,
-        loading: false
-      })
     default:
       return state;
   }

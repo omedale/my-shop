@@ -5,7 +5,7 @@ import styles from './TopBar.module.scss'
 
 const { Search } = Input;
 
-const topbar = ({ onSearch }) => (<section className={styles.headerWrapper}>
+const topbar = ({ searchQuery, onSearch, changeSearch }) => (<section className={styles.headerWrapper}>
   <div className="container">
     <div className="row text-center">
       <div className={styles.navWrapper}>
@@ -14,6 +14,8 @@ const topbar = ({ onSearch }) => (<section className={styles.headerWrapper}>
         </div>
         <div>
           <Search
+            value={searchQuery}
+            onChange={changeSearch}
             placeholder="input search text"
             onSearch={value => onSearch(value)}
             className={styles.searchBar}

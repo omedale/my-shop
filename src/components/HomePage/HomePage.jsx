@@ -5,7 +5,7 @@ import Product from '../../containers/Products/Products'
 const HomePage = (props) => (
   <>
     <FilterSection {...props} />
-    <Product />
+    <Product {...props} />
   </>
 )
 

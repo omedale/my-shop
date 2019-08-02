@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Filter from '../../components/Common/Filter/Filter'
-import { getFilterData } from '../../actions/config'
-import { getProducts } from '../../actions/products'
+import Filter from '../../components/Common/Filter/Filter';
+import { getFilterData } from '../../actions/config';
+import { getProducts } from '../../actions/products';
+import Helper from '../../util/helper';
 
+const PAGE = 1
 class FilterSection extends Component {
   state = {
     maxPrice: 0,
     minPrice: 0,
     filterByDepartmentIds: [],
-    filterByCategoryIds: [],
+    filterByCategoryIds: []
   }
 
   componentDidMount() {
     this.props.fetchFilterData();
+    const params = new URLSearchParams(this.props.history.location.search)
+    const filterQuery = params.get('filter');
+    const filterData = filterQuery ? JSON.parse(filterQuery) : { price_range: [0,0], department_ids: [], category_ids: [] }
+    this.setState({
+      maxPrice: filterData.price_range[1],
+      minPrice: filterData.price_range[0],
+      filterByDepartmentIds: filterData.department_ids,
+      filterByCategoryIds: filterData.category_ids,
+    })
   }
 
   handleDepartmentChange = (value) => {
@@ -31,14 +42,18 @@ class FilterSection extends Component {
   }
 
   handleFilter = () => {
-    console.log(this.props)
+    const params = new URLSearchParams(this.props.history.location.search)
+    const searchQuery = params.get('q');
+    const searchParams = searchQuery ? searchQuery : '';
+    const filter = {
+                      price_range: [this.state.minPrice, this.state.maxPrice],
+                      department_ids: this.state.filterByDepartmentIds,
+                      category_ids: this.state.filterByCategoryIds
+                    }
+    Helper.setUrl(searchParams, '/home', this.props, filter)
     this.props.filterProducts(
-      1, '',
-      {
-        price_range: [this.state.minPrice, this.state.maxPrice],
-        department_ids: this.state.filterByDepartmentIds,
-        category_ids: this.state.filterByCategoryIds
-      }
+      PAGE, searchParams,
+      filter
     )
   }
 

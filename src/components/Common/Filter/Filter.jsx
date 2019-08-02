@@ -24,7 +24,7 @@ const Filter = (
               mode="multiple"
               style={{ minWidth: '130px' }}
               placeholder="Please select"
-              defaultValue={defaultDepartment}
+              value={defaultDepartment}
               onChange={departmentChange}
             >
             {departmentOptions}
@@ -38,7 +38,7 @@ const Filter = (
               mode="multiple"
               style={{ minWidth: '130px' }}
               placeholder="Please select"
-              defaultValue={defaultCategory}
+              value={defaultCategory}
               onChange={categoryChange}
             >
             {categoryOptions}
