@@ -4,14 +4,14 @@ import { Pagination } from 'antd'
 import ProductItem from '../ProductItem/ProductItem'
 import styles from './ProductList.module.scss'
 
-const ProductList = ({ isLoading, products, total, changePage, current }) => {
+const ProductList = ({ isLoading, products, total, changePage, current, showProduct }) => {
   const pagination  = products.length ? 
     (<div className={ [styles.paginationWrapper, 'row'].join(' ') }>
       <Pagination onChange={changePage} defaultCurrent={current} pageSize={20}  total={total} />
     </div>) : null
   
   const productItems = products.map(product => (
-    <ProductItem key={product.product_id} product={product} />
+    <ProductItem key={product.product_id} product={product} showDetail={() => showProduct(product.product_id)} />
   ))
   return (
     <div className={styles.products}>

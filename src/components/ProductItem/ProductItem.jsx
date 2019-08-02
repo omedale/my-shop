@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import { Button } from 'antd';
 import styles from './ProductItem.module.scss'
 
-const ProductItem = ({ product }) => (
-  <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+const ProductItem = ({ product, showDetail }) => (
+  <div onClick={showDetail} className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
     <div className={styles.product}>
       <div className={styles.productLink}>
           <div className={styles.productImage}>

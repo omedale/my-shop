@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../../components/Common/Loader'
 import { getProducts } from '../../actions/products'
 import ProductList from '../../components/ProductList/ProductList'
+import ProductDetail from '../../components/ProductDetail/ProductDetail'
 
 const PAGE = 1
 const Products = (props) => {
   const [currentPage, changePage] = useState(PAGE);
+  const [showModal, toggleModal] = useState(false);
   const dispatch = useDispatch()
   const products =  useSelector(state  => state.product.products)
   const total =  useSelector(state  => state.product.count)
@@ -14,6 +16,18 @@ const Products = (props) => {
 
   const handlePageChange = (value) => {
     changePage(value)
+  }
+
+  const showProductDetail = (id) => {
+    toggleModal(true)
+  }
+
+  const handleCloseModal = () => {
+    toggleModal(false)
+  }
+
+  const handleAddToCart = () => {
+    toggleModal(false)
   }
 
   useEffect(() => {
@@ -32,8 +46,10 @@ const Products = (props) => {
           total={total}
           changePage={handlePageChange}
           current={currentPage}
-          />
+          showProduct={showProductDetail}
+        />
       }
+      <ProductDetail visible={showModal} cancel={handleCloseModal} addToCart={handleAddToCart} />
     </>
   )
 };
