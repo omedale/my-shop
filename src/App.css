@@ -74,3 +74,11 @@ a:hover {
   justify-content: flex-start;
 }
 
+
+.ant-radio-button-wrapper:first-child, .ant-radio-group-small .ant-radio-button-wrapper, .ant-radio-button-wrapper {
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+}
