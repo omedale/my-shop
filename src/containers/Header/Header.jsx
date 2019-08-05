@@ -27,7 +27,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <TopBar searchQuery={this.state.searchQuery} onSearch={this.handleSearch} changeSearch={this.handleSearchValue} />
+      <TopBar searchQuery={this.state.searchQuery} onSearch={this.handleSearch} changeSearch={this.handleSearchValue} totalCart={this.props.totalCart} />
     );
   }
 }
@@ -36,4 +36,8 @@ const mapDispatchToProps = (dispatch) => ({
   getProducts: (page, word) => dispatch(getProducts(page, word))
 })
 
-export default connect(null, mapDispatchToProps)(Header);
+const mapStateToProps = (state) => ({
+  totalCart: state.cart.carts.length
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

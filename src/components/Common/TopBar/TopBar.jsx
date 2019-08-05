@@ -5,7 +5,7 @@ import styles from './TopBar.module.scss'
 
 const { Search } = Input;
 
-const topbar = ({ searchQuery, onSearch, changeSearch }) => (<section className={styles.headerWrapper}>
+const topbar = ({ searchQuery, onSearch, changeSearch, totalCart }) => (<section className={styles.headerWrapper}>
   <div className="container">
     <div className="row text-center">
       <div className={styles.navWrapper}>
@@ -39,7 +39,7 @@ const topbar = ({ searchQuery, onSearch, changeSearch }) => (<section className=
           <span className="no-gutters cart py-1">
             <Link to="/cart" className="">
                 <span>
-                  <Badge count="3"><Avatar shape="square" icon="shopping-cart" /></Badge>
+                  <Badge count={totalCart}><Avatar shape="square" icon="shopping-cart" /></Badge>
                 </span>
             </Link>
           </span>

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Modal, Radio, Button } from 'antd';
+import { Modal, Radio, Button, Alert } from 'antd';
+import Proptypes from 'prop-types'
 import styles from './ProductDetail.module.scss'
 
 const ProductDetail = ({ 
   size, sizes, setSize, colors, color, setColor, product, visible,
-  cancel, addToCart, currentImage, gotoImage, images, isLoading }) => {
+  cancel, addToCart, currentImage, gotoImage, images, isLoading, errorMessage }) => {
 
   const imageItems = images.map(image => 
       <img onClick={() => {gotoImage(image)}} className={styles.image} key={image} src={image} alt="" />)
@@ -58,13 +59,18 @@ const ProductDetail = ({
             <strong>Description</strong>
             <p>{product.description}</p>
           </div>
+          { errorMessage ? <Alert message={errorMessage} type="error" showIcon /> : null }
           <div className={styles.detailFilterItem}>
-            <Button disabled={isLoading} onClick={addToCart} className={styles.addToCartBtn} type="primary">Add to cart</Button>
+            <Button disabled={isLoading} onClick={() => addToCart(product.product_id)} className={styles.addToCartBtn} type="primary">Add to cart</Button>
             <Button key="back" onClick={cancel}>Return</Button>
           </div>
         </div>
       </div>
     </Modal>)
+}
+
+ProductDetail.propTypes = {
+  addToCart: Proptypes.func.isRequired
 }
 
 export default ProductDetail;

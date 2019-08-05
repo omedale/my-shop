@@ -65,7 +65,7 @@ const AuthForm = ({ error, hasError, isSuccess, isLoading, authType, clicked, ge
   </>)
 }
 
-AuthForm.prototype = {
+AuthForm.propTypes = {
   clicked: PropTypes.func.isRequired,
   getFieldDecorator: PropTypes.func.isRequired,
   authType: PropTypes.string.isRequired,

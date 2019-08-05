@@ -4,11 +4,12 @@ import storage from 'redux-persist/lib/storage'
 import customer from './customer'
 import config from './config'
 import product from './products'
+import cart  from './cart'
 
 const rootPersistConfig = {
   key: 'root',
   storage: storage,
-  blacklist: ['customer', 'config', 'product']
+  blacklist: ['customer', 'config', 'product', 'cart']
 }
 
 const persistCustomer = {
@@ -17,10 +18,17 @@ const persistCustomer = {
   blacklist: ['error', 'isLoading']
 }
 
+const persistCart = {
+  key: 'cart',
+  storage,
+  blacklist: ['carts']
+}
+
 const rootReducer = combineReducers({
   customer: persistReducer(persistCustomer, customer),
   config: config,
-  product: product
+  product: product,
+  cart: persistReducer(persistCart, cart)
 })
 
 export default persistReducer(rootPersistConfig, rootReducer);

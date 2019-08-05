@@ -28,7 +28,7 @@ const ProductList = ({ isLoading, products, total, changePage, current, showProd
   );
 }
 
-ProductList.prototype = {
+ProductList.propTypes = {
   products: Proptypes.array.isRequired,
   total: Proptypes.number.isRequired,
   changePage: Proptypes.func.isRequired,

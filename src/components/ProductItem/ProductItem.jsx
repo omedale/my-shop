@@ -35,7 +35,7 @@ const ProductItem = ({ product, showDetail }) => (
   </div>
 )
 
-ProductItem.prototype = {
+ProductItem.propTypes = {
   product: Proptypes.object.isRequired
 }
 

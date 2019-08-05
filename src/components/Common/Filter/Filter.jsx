@@ -66,10 +66,9 @@ const Filter = (
   </div>)
 }
 
-Filter.prototype = {
+Filter.propTypes = {
   categories: Proptypes.array.isRequired,
   departments: Proptypes.array.isRequired,
-  attributes: Proptypes.array.isRequired,
   maxPrice: Proptypes.number.isRequired,
   minPrice: Proptypes.number.isRequired,
   changePrice: Proptypes.func.isRequired,

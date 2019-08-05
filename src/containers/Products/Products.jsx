@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../../components/Common/Loader'
 import ProductList from '../../components/ProductList/ProductList'
 import ProductDetail from '../../components/ProductDetail/ProductDetail'
+import { updateCart } from '../../actions/cart'
 
 const PAGE = 1
 const Products = (props) => {
+  const dispatch = useDispatch()
+
   const [currentPage, changePage] = useState(PAGE);
   const [showModal, toggleModal] = useState(false);
   const [currentImage, toggleImage] = useState('');
   const [color, toggleColor] = useState('');
   const [size, toggleSize] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [images, getImages] = useState([]);
   const [product, getProduct] = useState({});
-  const products =  useSelector(state  => state.product.products)
+  
+  const { products, count, loading } = useSelector(state  => state.product)
+
   const attributes =  useSelector(state  => state.config.attributes)
-  const total =  useSelector(state  => state.product.count)
-  const isLoading = useSelector(state  => state.product.loading)
+  const { carts, cartId } =  useSelector(state  => state.cart)
 
 
   const colorAttribute = attributes.filter(attribute => attribute.name === 'Color')
@@ -30,6 +35,8 @@ const Products = (props) => {
   }
 
   const showProductDetail = (id) => {
+    toggleSize('');
+    toggleColor('')
     const currentProduct = products.find(product => product.product_id === id)
     getProduct(currentProduct)
     toggleImage(currentProduct.image)
@@ -41,8 +48,25 @@ const Products = (props) => {
     toggleModal(false)
   }
 
-  const handleAddToCart = () => {
-    toggleModal(false)
+  const handleAddToCart = (productId) => {
+    setErrorMessage('');
+    if (!size || !color) {
+      setErrorMessage('Please select color and size');
+      return;
+    }
+    const cartAttributes = `${color}, ${size}`;
+    const cart = carts.find(cart => (parseInt(cart.product_id) === parseInt(productId)) &&
+                    (cart.attributes === cartAttributes))
+    if (cart) {
+
+    } else {
+      const data = {
+        cart_id: cartId,
+        product_id: productId,
+        attributes: cartAttributes
+      }
+      dispatch(updateCart(data))
+    }
   }
 
   const handleChangeImage = (image) => {
@@ -59,11 +83,11 @@ const Products = (props) => {
 
   return (
     <>
-      { isLoading ? <Loader /> :
+      { loading ? <Loader /> :
         <ProductList 
-          isLoading={isLoading}
+          isLoading={loading}
           products={products}
-          total={total}
+          total={count}
           changePage={handlePageChange}
           current={currentPage}
           showProduct={showProductDetail}
@@ -83,7 +107,8 @@ const Products = (props) => {
           addToCart={handleAddToCart}
           currentImage={currentImage}
           gotoImage={handleChangeImage}
-          images={images} /> : 0
+          images={images}
+          errorMessage={errorMessage} /> : 0
       }
     </>
   )
