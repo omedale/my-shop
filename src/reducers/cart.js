@@ -13,7 +13,7 @@ const cart = (state = initialState, action) => {
         cartId: action.cartId,
         status: action.status
       };
-    case 'FETCH_CART':
+    case 'UPDATE_CART':
       return {
         ...state,
         cartLoading: true

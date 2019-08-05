@@ -24,10 +24,21 @@ const setCartConfig = (data) => {
   }
 }
 
-export const updateCart = (data) => {
+export const addCart = (data) => {
   return (dispatch, getState) => {
     dispatch(updatingCart())
     CartService.addCart(data)
+    .then(response => {
+      dispatch(updateCartSuccess(response.data))
+    })
+    .catch(error => console.log(error.response.data.error))
+  }
+}
+
+export const updateCart = (data) => {
+  return (dispatch, getState) => {
+    dispatch(updatingCart())
+    CartService.updateCart(data)
     .then(response => {
       dispatch(updateCartSuccess(response.data))
     })

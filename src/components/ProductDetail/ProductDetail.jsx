@@ -5,7 +5,7 @@ import styles from './ProductDetail.module.scss'
 
 const ProductDetail = ({ 
   size, sizes, setSize, colors, color, setColor, product, visible,
-  cancel, addToCart, currentImage, gotoImage, images, isLoading, errorMessage }) => {
+  cancel, addToCart, currentImage, gotoImage, images, cartLoading, errorMessage }) => {
 
   const imageItems = images.map(image => 
       <img onClick={() => {gotoImage(image)}} className={styles.image} key={image} src={image} alt="" />)
@@ -61,7 +61,7 @@ const ProductDetail = ({
           </div>
           { errorMessage ? <Alert message={errorMessage} type="error" showIcon /> : null }
           <div className={styles.detailFilterItem}>
-            <Button disabled={isLoading} onClick={() => addToCart(product.product_id)} className={styles.addToCartBtn} type="primary">Add to cart</Button>
+            <Button disabled={cartLoading} onClick={() => addToCart(product.product_id)} className={styles.addToCartBtn} type="primary">Add to cart</Button>
             <Button key="back" onClick={cancel}>Return</Button>
           </div>
         </div>

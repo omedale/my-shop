@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../../components/Common/Loader'
 import ProductList from '../../components/ProductList/ProductList'
 import ProductDetail from '../../components/ProductDetail/ProductDetail'
-import { updateCart } from '../../actions/cart'
+import { updateCart, addCart } from '../../actions/cart'
 import { getProducts } from '../../actions/products';
 import Helper from '../../util/helper';
 
@@ -23,7 +23,7 @@ const Products = (props) => {
   const { products, count, loading } = useSelector(state  => state.product)
 
   const attributes =  useSelector(state  => state.config.attributes)
-  const { carts, cartId } =  useSelector(state  => state.cart)
+  const { carts, cartId, cartLoading } =  useSelector(state  => state.cart)
 
 
   const colorAttribute = attributes.filter(attribute => attribute.name === 'Color')
@@ -75,14 +75,19 @@ const Products = (props) => {
     const cart = carts.find(cart => (parseInt(cart.product_id) === parseInt(productId)) &&
                     (cart.attributes === cartAttributes))
     if (cart) {
-
+      const newQuantity = cart.quantity + 1
+      const updateParams = {
+        item_id: cart.item_id,
+        quantity: newQuantity
+      }
+      dispatch(updateCart(updateParams))
     } else {
       const data = {
         cart_id: cartId,
         product_id: productId,
         attributes: cartAttributes
       }
-      dispatch(updateCart(data))
+      dispatch(addCart(data))
     }
   } 
 
@@ -132,7 +137,8 @@ const Products = (props) => {
           currentImage={currentImage}
           gotoImage={handleChangeImage}
           images={images}
-          errorMessage={errorMessage} /> : null
+          errorMessage={errorMessage}
+          cartLoading={cartLoading} /> : null
       }
     </>
   )
