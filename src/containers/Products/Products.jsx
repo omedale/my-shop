@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../../components/Common/Loader'
 import ProductList from '../../components/ProductList/ProductList'
 import ProductDetail from '../../components/ProductDetail/ProductDetail'
 import { updateCart } from '../../actions/cart'
+import { getProducts } from '../../actions/products';
+import Helper from '../../util/helper';
 
 const PAGE = 1
 const Products = (props) => {
@@ -30,8 +32,23 @@ const Products = (props) => {
   const sizeAtribute = attributes.filter(attribute => attribute.name === 'Size')
   const sizes = sizeAtribute.length ? sizeAtribute[0].attribute_values : []
 
-  const handlePageChange = (value) => {
-    changePage(value)
+  const handlePageChange = (page) => {
+    const { filterQuery, searchQuery } = Helper.getUrlParams(props.history.location.search)
+    const searchParam = searchQuery ? searchQuery : '';
+    const filterData = filterQuery ? JSON.parse(filterQuery) : { price_range: [0,0], department_ids: [], category_ids: [] }
+
+    let action  = 'PAGINATE'
+    if(filterQuery && searchQuery) {
+      action = 'ALL_PARAMS'
+    } else if (filterQuery && !searchQuery) {
+      action = 'PAGINATE_AND_FILTER'
+    } else if (!filterQuery && searchQuery) {
+      action = 'PAGINATE_AND_SEARCH'
+    }
+
+    Helper.setUrl(searchQuery, '/home', props, filterData, page, action)
+    changePage(page)
+    dispatch(getProducts(page, searchParam, filterData))
   }
 
   const showProductDetail = (id) => {
@@ -67,7 +84,7 @@ const Products = (props) => {
       }
       dispatch(updateCart(data))
     }
-  }
+  } 
 
   const handleChangeImage = (image) => {
     toggleImage(image)
@@ -80,6 +97,13 @@ const Products = (props) => {
   const handleSizeChange = (e) => {
     toggleSize(e.target.value)
   }
+
+  useEffect(() => {
+    const { pageQuery } = Helper.getUrlParams(props.history.location.search)
+    if (pageQuery) {
+      changePage(parseInt(pageQuery))
+    }
+  }, [changePage, props.history.location])
 
   return (
     <>
@@ -108,7 +132,7 @@ const Products = (props) => {
           currentImage={currentImage}
           gotoImage={handleChangeImage}
           images={images}
-          errorMessage={errorMessage} /> : 0
+          errorMessage={errorMessage} /> : null
       }
     </>
   )

@@ -19,9 +19,7 @@ class FilterSection extends Component {
     this.props.fetchFilterData();
     this.props.getCartId()
     this.props.getCarts(this.props.cartId)
-    const params = new URLSearchParams(this.props.history.location.search)
-    const filterQuery = params.get('filter');
-    const searchQuery = params.get('q');
+    const { filterQuery, searchQuery, pageQuery } = Helper.getUrlParams(this.props.history.location.search)
     const searchParam = searchQuery ? searchQuery : '';
     const filterData = filterQuery ? JSON.parse(filterQuery) : { price_range: [0,0], department_ids: [], category_ids: [] }
     this.setState({
@@ -30,7 +28,7 @@ class FilterSection extends Component {
       filterByDepartmentIds: filterData.department_ids,
       filterByCategoryIds: filterData.category_ids,
     })
-    this.props.filterProducts(PAGE, searchParam, filterData)
+    this.props.filterProducts((pageQuery || PAGE), searchParam, filterData)
   }
 
   handleDepartmentChange = (value) => {
@@ -56,7 +54,8 @@ class FilterSection extends Component {
                       department_ids: this.state.filterByDepartmentIds,
                       category_ids: this.state.filterByCategoryIds
                     }
-    Helper.setUrl(searchParams, '/home', this.props, filter)
+    const action = searchParams ? 'SEARCH_AND_FILTER' : 'FILTER'
+    Helper.setUrl(searchParams, '/home', this.props, filter, null, action)
     this.props.filterProducts(
       PAGE, searchParams,
       filter
@@ -64,12 +63,18 @@ class FilterSection extends Component {
   }
 
   handleResetFilter = () => {
+    const { searchQuery } = Helper.getUrlParams(this.props.history.location.search)
+    const action = searchQuery ? 'SEARCH' : ''
+    Helper.setUrl(searchQuery, '/home', this.props, null, null, action)
     this.setState({
       filterByDepartmentIds: [],
       filterByCategoryIds: [],
       maxPrice: 0,
       minPrice: 0
     })
+    this.props.filterProducts(
+      PAGE, (searchQuery || '')
+    )
   }
   
   render() {

@@ -21,8 +21,19 @@ class Header extends React.Component {
   }
 
   handleSearch = (value) => {
-    Helper.setUrl(value, '/home', this.props)
-    this.props.getProducts(PAGE, value)
+    let { filterQuery } = Helper.getUrlParams(this.props.history.location.search)
+    const filterData = filterQuery ? JSON.parse(filterQuery) : { price_range: [0,0], department_ids: [], category_ids: [] }
+    let action  = ''
+    if(filterQuery && value) {
+      action = 'SEARCH_AND_FILTER'
+    } else if (filterQuery && !value) {
+      action = 'FILTER'
+    } else if (!filterQuery && value) {
+      action = 'SEARCH'
+    }
+
+    Helper.setUrl(value, '/home', this.props, filterData, null, action)
+    this.props.getProducts(PAGE, value, filterData)
   }
 
   render() {
@@ -33,7 +44,7 @@ class Header extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getProducts: (page, word) => dispatch(getProducts(page, word))
+  getProducts: (page, word, search) => dispatch(getProducts(page, word, search))
 })
 
 const mapStateToProps = (state) => ({

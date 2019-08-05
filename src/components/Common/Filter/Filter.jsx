@@ -69,8 +69,6 @@ const Filter = (
 Filter.propTypes = {
   categories: Proptypes.array.isRequired,
   departments: Proptypes.array.isRequired,
-  maxPrice: Proptypes.number.isRequired,
-  minPrice: Proptypes.number.isRequired,
   changePrice: Proptypes.func.isRequired,
   filterProducts: Proptypes.func.isRequired,
   resetFilter: Proptypes.func.isRequired,
