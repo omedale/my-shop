@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getProducts } from '../../actions/products'
 import TopBar from '../../components/Common/TopBar/TopBar'
+import { getCartConfig, fetchCart } from '../../actions/cart'
 import Helper from '../../util/helper'
 
 const PAGE = 1
@@ -14,6 +15,8 @@ class Header extends React.Component {
     const params = new URLSearchParams(this.props.history.location.search)
     const searchQuery = params.get('q');
     this.setState({searchQuery: searchQuery})
+    this.props.getCartId()
+    this.props.getCarts(this.props.cartId)
   }
 
   handleSearchValue = (e) => {
@@ -44,11 +47,17 @@ class Header extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getProducts: (page, word, search) => dispatch(getProducts(page, word, search))
+  getProducts: (page, word, search) => dispatch(getProducts(page, word, search)),
+  getCartId: () => dispatch(getCartConfig()),
+  getCarts: (cartId) => dispatch(fetchCart(cartId)),
 })
 
-const mapStateToProps = (state) => ({
-  totalCart: state.cart.carts.length
-})
+const mapStateToProps = (state) => {
+  const { cart } = state
+  return {
+    totalCart: cart.carts.length,
+    cartId: cart.cartId
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

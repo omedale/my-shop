@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Filter from '../../components/Common/Filter/Filter';
 import { getFilterData } from '../../actions/config';
 import { getProducts } from '../../actions/products';
-import { getCartConfig, fetchCart } from '../../actions/cart'
 import Helper from '../../util/helper';
 
 const PAGE = 1
@@ -17,8 +16,6 @@ class FilterSection extends Component {
 
   componentDidMount() {
     this.props.fetchFilterData();
-    this.props.getCartId()
-    this.props.getCarts(this.props.cartId)
     const { filterQuery, searchQuery, pageQuery } = Helper.getUrlParams(this.props.history.location.search)
     const searchParam = searchQuery ? searchQuery : '';
     const filterData = filterQuery ? JSON.parse(filterQuery) : { price_range: [0,0], department_ids: [], category_ids: [] }
@@ -101,19 +98,16 @@ class FilterSection extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     fetchFilterData: () => dispatch(getFilterData()),
-    getCartId: () => dispatch(getCartConfig()),
-    getCarts: (cartId) => dispatch(fetchCart(cartId)),
     filterProducts: (page, searchKeys, filterData) => dispatch(getProducts(page, searchKeys, filterData))
   }
 }
 
 const mapStateToProps = (state) => {
-  const { config, cart } = state
+  const { config } = state
   const { departments, categories } = config
   return {
     departments,
-    categories,
-    cartId: cart.cartId
+    categories
   }
 }
 
