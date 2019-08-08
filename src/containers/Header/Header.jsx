@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getProducts } from '../../actions/products'
 import TopBar from '../../components/Common/TopBar/TopBar'
 import { getCartConfig, fetchCart } from '../../actions/cart'
+import { getCheckOutData } from '../../actions/config';
 import Helper from '../../util/helper'
 
 const PAGE = 1
@@ -17,6 +18,7 @@ class Header extends React.Component {
     this.setState({searchQuery: searchQuery})
     this.props.getCartId()
     this.props.getCarts(this.props.cartId)
+    this.props.fetchCheckOutData()
   }
 
   handleSearchValue = (e) => {
@@ -50,6 +52,7 @@ const mapDispatchToProps = (dispatch) => ({
   getProducts: (page, word, search) => dispatch(getProducts(page, word, search)),
   getCartId: () => dispatch(getCartConfig()),
   getCarts: (cartId) => dispatch(fetchCart(cartId)),
+  fetchCheckOutData: () => dispatch(getCheckOutData())
 })
 
 const mapStateToProps = (state) => {

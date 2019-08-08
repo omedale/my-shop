@@ -1,3 +1,5 @@
+import Dinero from 'dinero.js';
+const language = 'en-US';
 export default {
   setUrl(searchKey, route, props, filter = null, page = null, type) {
     const filterParams = new URLSearchParams({ filter: JSON.stringify(filter) }).toString();
@@ -66,5 +68,32 @@ export default {
       searchQuery,
       pageQuery
     }
+  },
+
+  toPrice (amount, factor = Math.pow(10, 2)) {
+    return Dinero({ amount: Math.round(amount * factor) }).setLocale(
+      language
+    )
+  },
+
+  getSubtotal (carts) {
+    return carts.reduce(
+      (cum, item) => cum.add(this.toPrice(parseFloat(item.discounted_price) > 0
+        ? parseFloat(item.discounted_price) : parseFloat(item.price)).multiply(item.quantity)),
+      Dinero().setLocale(language)
+    )
+  },
+
+  getTaxAmount (carts, currentTaxRate) {
+    return this.getSubtotal(carts).percentage(currentTaxRate)
+  },
+
+  getShippingPrice (shippingPrice) {
+    return this.toPrice(shippingPrice)
+  },
+
+  getTotal (shippingPrice, shippingFee, carts, currentTaxRate) {
+    const formattedShippingFee = this.toPrice(shippingFee)
+    return this.getSubtotal(carts).add(this.getTaxAmount(carts, currentTaxRate)).add(this.getShippingPrice(shippingPrice)).add(formattedShippingFee)
   }
 }

@@ -2,6 +2,8 @@ const initialState = {
   categories: [],
   departments: [],
   attributes: [],
+  shipping_regions: [],
+  tax: []
 }
 
 const config = (state = initialState, action) => {
@@ -11,6 +13,11 @@ const config = (state = initialState, action) => {
         categories: action.categories,
         departments: action.departments,
         attributes: action.attributes
+      })
+    case 'SET_CHECKOUT_DATA':
+      return Object.assign({}, state, {
+        tax: action.tax,
+        shipping_regions: action.shipping_regions,
       })
     default:
       return state

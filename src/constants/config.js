@@ -1,1 +1,2 @@
 export const SET_FILTER_DATA = 'SET_FILTER_DATA';
+export const SET_CHECKOUT_DATA = 'SET_CHECKOUT_DATA';
