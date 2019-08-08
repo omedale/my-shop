@@ -15,5 +15,9 @@ export default {
 
   async getAllCartItem (cartId) {
     return await Api().get(`api/shoppingcart/${cartId}`)
+  },
+
+  async removeProduct (itemId) {
+    return await Api().delete(`api/shoppingcart/removeProduct/${itemId}`)
   }
 }

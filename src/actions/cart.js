@@ -1,4 +1,4 @@
-import { FETCH_CART_SUCCESS, UPDATE_CART, UPDATE_CART_CONFIG } from '../constants/cart';
+import { FETCH_CART_SUCCESS, UPDATE_CART, UPDATE_CART_CONFIG, REMOVE_CART_ITEM_SUCCESS } from '../constants/cart';
 import CartService from '../services/cart';
 
 
@@ -16,6 +16,14 @@ const updateCartSuccess = (data) => {
   }
 }
 
+const removeCartItemSuccess = (itemId) => {
+  return {
+    itemId,
+    type: REMOVE_CART_ITEM_SUCCESS,
+    cartLoading: false
+  }
+}
+
 const setCartConfig = (data) => {
   return {
     type: UPDATE_CART_CONFIG,
@@ -30,6 +38,17 @@ export const addCart = (data) => {
     CartService.addCart(data)
     .then(response => {
       dispatch(updateCartSuccess(response.data))
+    })
+    .catch(error => console.log(error.response.data.error))
+  }
+}
+
+export const removeCartItem = (itemId) => {
+  return (dispatch, getState) => {
+    dispatch(updatingCart())
+    CartService.removeProduct(itemId)
+    .then(response => {
+      dispatch(removeCartItemSuccess(itemId))
     })
     .catch(error => console.log(error.response.data.error))
   }

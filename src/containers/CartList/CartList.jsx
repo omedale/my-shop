@@ -1,9 +1,31 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CartItem from '../../components/CartItem/CartItem'
+import { updateCart, removeCartItem } from '../../actions/cart'
 
 const CartList = () => {
-  const { carts } =  useSelector(state  => state.cart)
+  const dispatch = useDispatch()
+  const { carts, cartLoading } =  useSelector(state  => state.cart)
+
+  const handleUpdateCart = (cartItemId, quantity) => {
+    const item = carts.find(cart => (parseInt(cart.item_id) === parseInt(cartItemId)))
+    if (item) {
+      const newQuantity = quantity + item.quantity
+      if (newQuantity <= 0) {
+        dispatch(removeCartItem(cartItemId))
+      } else {
+        const updateParams = {
+          item_id: cartItemId,
+          quantity: newQuantity
+        }
+        dispatch(updateCart(updateParams))
+      }
+    }
+  }
+
+  const handleDeleteCartItem = (itemId) => {
+    dispatch(removeCartItem(itemId))
+  }
 
   return(
           <div className="table-wrapper">
@@ -20,7 +42,14 @@ const CartList = () => {
               </thead>
               <tbody>
                 { 
-                  carts.map((cart, index) => (<CartItem key={index} cart={cart} index={index} />))
+                  carts.map((item, index) => (
+                    <CartItem
+                      key={index}
+                      updateCart={handleUpdateCart}
+                      deleteCartItem={handleDeleteCartItem}
+                      cartItem={item}
+                      cartLoading={cartLoading}
+                      index={index} />))
                 }
               </tbody>
             </table>

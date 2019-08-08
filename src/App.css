@@ -169,11 +169,16 @@ a:hover {
   align-items: center;
 }
 .item-image-wrapper {
-  height: 130px;
-  width: 130px;
-  object-fit: contain;
   overflow: hidden;
   margin-right: 0.5rem
+}
+.vertical-align-cart-item {
+  margin-top: 1.99rem;
+}
+.cart-item-image {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
 }
 .item-thumbnail {
   margin-right: 20px;

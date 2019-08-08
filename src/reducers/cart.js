@@ -13,6 +13,12 @@ const cart = (state = initialState, action) => {
         cartId: action.cartId,
         status: action.status
       };
+    case 'REMOVE_CART_ITEM_SUCCESS':
+      return {
+        ...state,
+        carts: state.carts.filter(item => (parseInt(item.item_id) !== parseInt(action.itemId))),
+        cartLoading: action.cartLoading
+      };
     case 'UPDATE_CART':
       return {
         ...state,
