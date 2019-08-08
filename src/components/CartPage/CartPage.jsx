@@ -20,7 +20,7 @@ const CartPage = (props) => (
           </Link>
         </Button>
         <Button className="right-nav-btn" type="primary">
-          <Link className="anchor-button " to="/">
+          <Link className="anchor-button " to="/checkout">
             Checkout<Icon type="right" />
           </Link>
         </Button>

@@ -1,7 +1,10 @@
+import moment from 'moment'
+
 const initialState = {
   customer: null,
   token: null,
   error: null,
+  tokenExpIN: null,
   isLoading: false
 }
 
@@ -13,23 +16,26 @@ const customer = (state = initialState, action) => {
         customer: null,
         token: null,
         error: null,
-        isLoading: true
+        isLoading: true,
+        tokenExpIN: null
       };
     case 'AUTHENTICATION_SUCCESS':
-        return {
-          ...state,
-          customer: action.customer,
-          token: action.token,
-          error: null,
-          isLoading: false
-        };
+      return {
+        ...state,
+        tokenExpIN: moment.utc().add(1, 'day').format('YYYY,MM-DD HH:mm:ss'),
+        customer: action.customer,
+        token: action.token,
+        error: null,
+        isLoading: false
+      };
     case 'AUTHENTICATION_ERROR':
       return {
         ...state,
         customer: null,
         token: null,
         error: action.error,
-        isLoading: false
+        isLoading: false,
+        tokenExpIN: null
       };
     default:
       return state;

@@ -31,7 +31,7 @@ const CartItem = ({ index, cartItem, updateCart, cartLoading, deleteCartItem }) 
     </td>
     <td>
       <Row className="vertical-align-cart-item" size="small">
-        <Col span={3}>
+        <Col className={styles.quantityBtnWrapper} span={3}>
           <Button disabled={cartLoading} onClick={() => updateCart(cartItem.item_id, -1)} shape="circle" icon="minus" size="small" />
         </Col>
         <Col className={[styles.quantityInput, 'mr-2', 'ml-2'].join(' ')} span={6}>

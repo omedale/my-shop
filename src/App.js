@@ -12,6 +12,7 @@ import MainLayoutRoute from './components/Layouts/MainLayout/MainLayoutRoute'
 import LoginPage from './components/LoginPage/LoginPage'
 import HomePage from './components/HomePage/HomePage'
 import CartPage from './components/CartPage/CartPage'
+import CheckoutPage from './components/CheckoutPage/CheckoutPage'
 import RegisterPage from './components/RegisterPage/RegisterPage'
 
 const { persistor, store } = configureStore()
@@ -32,6 +33,7 @@ const App = () => {
               <AuthLayoutRoute path="/register" component={RegisterPage} />  
               <MainLayoutRoute path="/home" component={HomePage} />
               <MainLayoutRoute path="/cart" component={CartPage} />
+              <MainLayoutRoute path="/checkout" component={CheckoutPage} />
           </Switch>
         </Router>
       </PersistGate>
