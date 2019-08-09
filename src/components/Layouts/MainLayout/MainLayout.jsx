@@ -4,6 +4,8 @@ import styles from './MainLayout.module.css';
 import Header from '../../../containers/Header/Header';
 import Footer from '../../Common/Footer';
 import { useAuth } from '../../../AuthService/useAuth'
+
+
 const PROTECTED_ROUTES = [
   '/checkout'
 ]

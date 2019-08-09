@@ -90,6 +90,11 @@ a:hover {
   border-top-right-radius: 12px;
 }
 
+.action-buttons-space-between{
+  display: flex;
+  justify-content: space-between;
+}
+
 
 .ant-radio-button-wrapper:first-child, .ant-radio-group-small .ant-radio-button-wrapper, .ant-radio-button-wrapper {
   border-radius: 12px;

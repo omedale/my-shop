@@ -1,7 +1,8 @@
 import React from 'react';
+import Checkout from '../../containers/Checkout/Checkout'
 
 const CheckoutPage = () => (
-  <h2>Checkout</h2>
+  <Checkout />
 );
 
 export default CheckoutPage;
