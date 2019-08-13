@@ -217,3 +217,7 @@ a:hover {
 .cursor-element {
   cursor: pointer;
 }
+
+.ant-radio-button-wrapper:not(:first-child):before {
+  width: unset !important;
+}
