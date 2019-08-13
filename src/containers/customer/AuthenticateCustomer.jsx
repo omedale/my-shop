@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'antd';
 import Proptypes from 'prop-types'
+import moment from 'moment'
 
 import { authenticationCustomer } from '../../actions/customers'
 import AuthForm from '../../components/Common/AuthForm'
+
 
 class Authenticator extends React.Component {
   static propTypes = {
@@ -41,9 +43,11 @@ class Authenticator extends React.Component {
 
 const mapStateToProps = (state) => {
   const { customer } = state
+  const now = moment(new Date())
+  const next24Hour = customer.tokenExpIN ? new Date(customer.tokenExpIN) : null
   return {
     isLoading: customer.isLoading,
-    isSuccess: !!customer.customer,
+    isSuccess: !!customer.customer && !!(now < moment(new Date(next24Hour))),
     hasError: !!customer.error,
     error: customer.error ? customer.error : {}
   }

@@ -28,6 +28,11 @@ const customer = (state = initialState, action) => {
         error: null,
         isLoading: false
       };
+    case 'UPDATE_CUSTOMER_ADDRESS':
+      return {
+        ...state,
+        customer: action.customer
+      }
     case 'AUTHENTICATION_ERROR':
       return {
         ...state,

@@ -5,11 +5,12 @@ import customer from './customer'
 import config from './config'
 import product from './products'
 import cart  from './cart'
+import order  from './order'
 
 const rootPersistConfig = {
   key: 'root',
   storage: storage,
-  blacklist: ['customer', 'config', 'product', 'cart']
+  blacklist: ['customer', 'config', 'product', 'cart', 'order']
 }
 
 const persistCustomer = {
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   customer: persistReducer(persistCustomer, customer),
   config: config,
   product: product,
+  order: order,
   cart: persistReducer(persistCart, cart)
 })
 

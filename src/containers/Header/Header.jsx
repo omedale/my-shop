@@ -56,7 +56,8 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => {
-  const { cart } = state
+  const { cart, customer } = state
+  sessionStorage.setItem('https://omedale-shoppy.netlify.com/token', customer.token);
   return {
     totalCart: cart.carts.length,
     cartId: cart.cartId

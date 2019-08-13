@@ -76,6 +76,16 @@ export const fetchCart = (cartId) => {
   }
 }
 
+export const resetCartConfig = () => {
+  return (dispatch, getState) => {
+    CartService.getCartID()
+    .then(response => {
+      dispatch(setCartConfig(response.data))
+    })
+    .catch(error => console.log(error.response.data.error))
+  }
+}
+
 export const getCartConfig = () => {
   return (dispatch, getState) => {
     if (!getState().cart.cartId || !getState().cart.status) {

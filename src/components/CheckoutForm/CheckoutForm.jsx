@@ -1,13 +1,15 @@
 import React from 'react';
 import { Form, Select, Input, Button, Row, Col } from 'antd';
+import StripeCheckout from 'react-stripe-checkout';
 import { Link } from 'react-router-dom'
+import styles from './CheckoutForm.module.scss'
 const { Option } = Select;
 
-const CheckoutForm = ({ name, email, address, address2, city, country, regionChange, regionId, regions, shippingChange,
-                       shippings, postalCode, checkoutCart, getFieldDecorator, isLoading }) => {
+const CheckoutForm = ({ name, email, address, address2, city, country, regionChange, regions, shippingChange,
+                       shippings, postalCode, checkoutCart, getFieldDecorator, isLoading, onToken, stripeButton, amount }) => {
 
-  const regionOptions = regions.map((region, index) => <Option value={region.shipping_region_id} key={region.shipping_region_id} >{region.shipping_region}</Option>)
-  const shippingOptions = shippings.map(shipping => <Option value={shipping.shipping_cost} key={shipping.shipping_id}>{shipping.shipping_type}</Option>)
+  const regionOptions = regions.map((region, index) => <Option value={JSON.stringify(region)} key={region.shipping_region_id} >{region.shipping_region}</Option>)
+  const shippingOptions = shippings.map(shipping => <Option value={JSON.stringify(shipping)} key={shipping.shipping_id}>{shipping.shipping_type}</Option>)
  
   return (
     <Form onSubmit={checkoutCart} className="login-form">
@@ -155,11 +157,24 @@ const CheckoutForm = ({ name, email, address, address2, city, country, regionCha
                 Back to cart
               </Link>
             </Button>
-            <Button type="primary">
+            <Button disabled={isLoading} htmlType="submit" type="primary">
               Place order
             </Button>
           </div>
         </Form.Item>
+        <StripeCheckout
+          className={styles.checkOutStyle}
+          amount={amount}
+          description="Awesome Product"
+          image="https://fakeimg.pl/80x80"
+          locale="auto"
+          name="Omedale Shoppy"
+          email={email}
+          stripeKey="pk_test_J3pjN4atklongAk7bZf8ceqJ00kTG38jww"
+          token={onToken}
+          zipCode
+          ref={stripeButton}
+        />
       </Form>)
   };
 

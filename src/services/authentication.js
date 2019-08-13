@@ -7,4 +7,7 @@ export default {
   async register (data) {
     return await Api().post(`api/customer`, data)
   },
+  async updateAddress (data) {
+    return await Api().put(`api/customers/address`, data)
+  }
 }

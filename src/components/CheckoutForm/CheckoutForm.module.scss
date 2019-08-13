@@ -1,0 +1,27 @@
+.checkOutStyle {
+  display: none !important;
+  overflow: hidden !important;
+  background: unset !important;
+  border: 0px !important;
+  padding: 1px !important;
+  text-decoration: none !important;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px !important;
+  cursor: pointer !important;
+  visibility: visible !important;
+  user-select: none !important;
+  color: #fff !important;
+  background-color: #1890ff !important;
+  border-color: #1890ff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12) !important;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+
+  span {
+    background-image: unset !important;
+    font-weight: unset !important;
+  }
+}
+

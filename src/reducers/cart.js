@@ -10,6 +10,7 @@ const cart = (state = initialState, action) => {
     case 'UPDATE_CART_CONFIG':
       return {
         ...state,
+        carts: [],
         cartId: action.cartId,
         status: action.status
       };
