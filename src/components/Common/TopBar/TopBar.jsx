@@ -34,8 +34,8 @@ const topbar = ({ searchQuery, onSearch, customer, logout, authenticated, change
           </>
           :
           <span>
-            <span><Link to="/login" className="">Login</Link></span> or
-            <span><Link to="/register" className="">Register</Link></span>
+            <span><Link to="/login" className="default-anchor">Login</Link></span> or
+            <span><Link to="/register" className="default-anchor">Register</Link></span>
           </span>
           }
           <span className="no-gutters cart py-1">
