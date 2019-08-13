@@ -1,4 +1,4 @@
-import { AUTHENTICATION_CUSTOMER, AUTHENTICATION_ERROR, AUTHENTICATION_SUCCESS, UPDATE_CUSTOMER_ADDRESS } from '../constants/customers'
+import { AUTHENTICATION_CUSTOMER, AUTHENTICATION_ERROR, AUTHENTICATION_SUCCESS, LOGOUT_CUSTOMER, UPDATE_CUSTOMER_ADDRESS } from '../constants/customers'
 import CustomerService from '../services/authentication'
 
 const authenticationSuccess = (customer) => {
@@ -29,6 +29,12 @@ const updateAddress = (customer) => {
   }
 }
 
+const logout = () => {
+  return {
+    type: LOGOUT_CUSTOMER,
+  }
+}
+
 export const updateCustomerAddress = (data) => {
   return  (dispatch, getState) => {
     CustomerService.updateAddress(data)
@@ -38,6 +44,12 @@ export const updateCustomerAddress = (data) => {
     .catch(error => {
       console.log(error.response.data.error)
     })
+  }
+}
+
+export const logoutCustomer = () => {
+  return (dispatch, getState) => {
+    dispatch(logout())
   }
 }
 

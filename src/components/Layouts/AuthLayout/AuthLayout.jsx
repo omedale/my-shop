@@ -11,7 +11,7 @@ const AuthLayout = ({ children }) => (
         <div className={styles.layout}>
           <div className={styles.header}>
             <div className={styles.logo}>
-              <Link to="/">
+              <Link className="default-anchor" to="/">
                 Home
               </Link>
             </div>

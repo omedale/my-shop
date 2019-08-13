@@ -5,7 +5,8 @@ import styles from './TopBar.module.scss'
 
 const { Search } = Input;
 
-const topbar = ({ searchQuery, onSearch, changeSearch, totalCart }) => (<section className={styles.headerWrapper}>
+const topbar = ({ searchQuery, onSearch, customer, logout, authenticated, changeSearch, totalCart }) => 
+(<section className={styles.headerWrapper}>
   <div className="container">
     <div className="row text-center">
       <div className={styles.navWrapper}>
@@ -23,15 +24,16 @@ const topbar = ({ searchQuery, onSearch, changeSearch, totalCart }) => (<section
         </div>
         <div>
           <div className={[styles.customerWrap, 'py-1'].join(" ")}>
-          <span className="py-1">Hi</span>
-          { true ? 
-          <span>
-            <span className={[styles.customerName, 'py-1'].join(" ")}>Medale</span> |
-            <span className={[styles.customerName, 'py-1', 'logout'].join(" ")}>Logout</span>
-          </span>
+          { authenticated ? 
+          <>
+            <span className="py-1">Hi</span>
+            <span>
+              <span className={[styles.customerName, 'py-1', 'default-anchor'].join(" ")}>{ customer.name }</span> |
+              <span onClick={logout} className={[styles.customerName, 'py-1', 'logout', 'default-anchor', 'cursor-element'].join(" ")}>Logout</span>
+            </span>
+          </>
           :
           <span>
-            |
             <span><Link to="/login" className="">Login</Link></span> or
             <span><Link to="/register" className="">Register</Link></span>
           </span>

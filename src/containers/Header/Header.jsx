@@ -1,9 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import moment from 'moment'
 import { getProducts } from '../../actions/products'
 import TopBar from '../../components/Common/TopBar/TopBar'
 import { getCartConfig, fetchCart } from '../../actions/cart'
 import { getCheckOutData } from '../../actions/config';
+import { logoutCustomer } from '../../actions/customers'
 import Helper from '../../util/helper'
 
 const PAGE = 1
@@ -25,6 +27,10 @@ class Header extends React.Component {
     this.setState({searchQuery: e.target.value})
   }
 
+  handleLogout = () => {
+    this.props.logout();
+  }
+
   handleSearch = (value) => {
     let { filterQuery } = Helper.getUrlParams(this.props.history.location.search)
     const filterData = filterQuery ? JSON.parse(filterQuery) : { price_range: [0,0], department_ids: [], category_ids: [] }
@@ -42,8 +48,18 @@ class Header extends React.Component {
   }
 
   render() {
+    const now = moment(new Date())
+    const next24Hour = this.props.customer.tokenExpIN ? new Date(this.props.customer.tokenExpIN) : null
+    const authenticated = now < moment(new Date(next24Hour))
     return (
-      <TopBar searchQuery={this.state.searchQuery} onSearch={this.handleSearch} changeSearch={this.handleSearchValue} totalCart={this.props.totalCart} />
+      <TopBar
+        authenticated={authenticated}
+        customer={this.props.customer.customer}
+        searchQuery={this.state.searchQuery}
+        onSearch={this.handleSearch}
+        logout={this.handleLogout}
+        changeSearch={this.handleSearchValue} 
+        totalCart={this.props.totalCart} />
     );
   }
 }
@@ -52,7 +68,8 @@ const mapDispatchToProps = (dispatch) => ({
   getProducts: (page, word, search) => dispatch(getProducts(page, word, search)),
   getCartId: () => dispatch(getCartConfig()),
   getCarts: (cartId) => dispatch(fetchCart(cartId)),
-  fetchCheckOutData: () => dispatch(getCheckOutData())
+  fetchCheckOutData: () => dispatch(getCheckOutData()),
+  logout: () => dispatch(logoutCustomer())
 })
 
 const mapStateToProps = (state) => {
@@ -60,7 +77,8 @@ const mapStateToProps = (state) => {
   sessionStorage.setItem('https://omedale-shoppy.netlify.com/token', customer.token);
   return {
     totalCart: cart.carts.length,
-    cartId: cart.cartId
+    cartId: cart.cartId,
+    customer: customer
   }
 }
 

@@ -57,8 +57,8 @@ const AuthForm = ({ error, hasError, isSuccess, isLoading, authType, clicked, ge
         { authType === 'REGISTER' ? 'Register' :'Log in' }
         </Button>
         { authType === 'REGISTER' ? 
-          (<Link to="/login"> I already have an account</Link>) :
-          (<Link to="/register"> I don't have an account</Link>)
+          (<Link className="default-anchor" to="/login"> I already have an account</Link>) :
+          (<Link className="default-anchor" to="/register"> I don't have an account</Link>)
         }
       </Form.Item>
     </Form>

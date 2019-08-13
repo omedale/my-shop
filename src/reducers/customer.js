@@ -19,6 +19,15 @@ const customer = (state = initialState, action) => {
         isLoading: true,
         tokenExpIN: null
       };
+    case 'LOGOUT_CUSTOMER':
+      return {
+        ...state,
+        customer: null,
+        token: null,
+        error: null,
+        isLoading: false,
+        tokenExpIN: null
+      };
     case 'AUTHENTICATION_SUCCESS':
       return {
         ...state,
