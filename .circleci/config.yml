@@ -46,7 +46,7 @@ jobs:
           name: Build
           command: yarn build
       - persist_to_workspace:
-          root: /home/circleci/project
+          root: /home/circleci/project/my-shop
           paths:
             - public
 
