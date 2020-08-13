@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 
 const footer = () => {
   const footerWrapper = {
@@ -8,7 +7,7 @@ const footer = () => {
     textAlign: 'center'
   }
   return(<p style={footerWrapper}>
-        <Link to="/" className="text-black-50">Omedale</Link>
+        <span className="text-black-50">Omedale</span>
       </p>)
 }
 
