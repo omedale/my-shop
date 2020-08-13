@@ -52,6 +52,7 @@ jobs:
 
   deploy:
     executor: node
+    working_directory: ~/my-shop
     steps:
       - checkout
       - attach_workspace:
