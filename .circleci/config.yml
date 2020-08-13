@@ -46,7 +46,7 @@ jobs:
           name: Build
           command: yarn build
       - persist_to_workspace:
-          root: /home/circleci/project/my-shop
+          root: /home/circleci/project
           paths:
             - public
 
@@ -63,7 +63,7 @@ jobs:
           command: sudo npm install -g --silent netlify-cli
       - run: 
           name: Deploy to Netlify
-          command: netlify deploy --dir=public -p
+          command: netlify deploy --dir=/home/circleci/project/public -p
 
 workflows:
   version: 2
