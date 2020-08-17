@@ -75,7 +75,7 @@ workflows:
           filters:
             branches:
               ignore:
-                - gh-pages
+                - staging
       - build:
           requires:
             - test
@@ -85,3 +85,7 @@ workflows:
           filters:
             branches:
               only: master
+
+
+# restore_cache - checks to see if there is a cache of our ./node_modules folder from a previous build.
+# save_cache - once the dependencies are installed the ./node_modules directory is cached for subsiquent use in build and deploy
