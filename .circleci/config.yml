@@ -57,7 +57,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /home/circleci/my-shop
+          at: /home/circleci/my-shop/
       - <<: *restore_cache
       - <<: *install_node_modules
       - run:
@@ -65,7 +65,7 @@ jobs:
           command: sudo npm install -g --silent netlify-cli
       - run: 
           name: Deploy to Netlify
-          command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --dir=/home/circleci/my-shop/public -p
+          command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --dir=public -p
 
 workflows:
   version: 2
